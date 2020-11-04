@@ -6,8 +6,8 @@
   "main": "server.js",
   "scripts": {
     "client": "cd client && npm start",
-    "server": "node -r esm server.js",
-    "dev": "concurrently --kill-others-on-fail \"nodemon -r esm server.js\" \"npm run client\"",
+    "server": "node -r esm server/server.js",
+    "dev": "concurrently --kill-others-on-fail \"nodemon -r esm server/server.js\" \"npm run client\"",
     "postinstall": "cd client && npm install"
   },
   "author": "",
