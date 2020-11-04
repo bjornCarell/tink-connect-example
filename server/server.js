@@ -3,11 +3,10 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import path from 'path'
 import fetch from 'node-fetch'
+import {handleResponse} from './handleResponse/handleResponse'
 
 dotenv.config()
-
 const app = express();
-
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.TINK_CLIENT_SECRET;
@@ -37,13 +36,6 @@ app.post("/callback", function(req, res) {
     });
 });
 
-async function handleResponse(response) {
-  const json = await response.json();
-  if (response.status !== 200) {
-    throw new Error(json.errorMessage);
-  }
-  return json;
-}
 
 async function getData(accessToken) {
   const [
