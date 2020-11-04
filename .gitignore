@@ -6,3 +6,6 @@
 
 # development
 .idea/
+
+# .env
+.env

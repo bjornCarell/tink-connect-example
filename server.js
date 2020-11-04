@@ -4,6 +4,8 @@ const bodyParser = require("body-parser");
 const path = require("path");
 const fetch = require("node-fetch");
 
+require('dotenv').config()
+
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.TINK_CLIENT_SECRET;
 
