@@ -1,10 +1,13 @@
-const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const path = require("path");
-const fetch = require("node-fetch");
+import dotenv from'dotenv'
+import express from 'express'
+import bodyParser from 'body-parser'
+import path from 'path'
+import fetch from 'node-fetch'
 
-require('dotenv').config()
+dotenv.config()
+
+const app = express();
+
 
 const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
 const CLIENT_SECRET = process.env.TINK_CLIENT_SECRET;
