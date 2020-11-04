@@ -1,9 +1,6 @@
 import React from "react";
-import { Button } from "reactstrap";
 import ReactRouterPropTypes from "react-router-prop-types";
-import { Header } from "./Header";
-import { FinancialOverview } from "./FinancialOverview";
-import { useCallback } from "../hooks/useCallback";
+import { useCallback } from "../../hooks/useCallback";
 
 const getHeaderProps = error =>
   error
@@ -23,12 +20,7 @@ export const Callback = ({ location }) => {
 
   return (
     <div>
-      <Header {...headerProps} />
-      <FinancialOverview loading={loading} data={data} error={error} />
-      <p style={{ fontSize: "18px", paddingTop: "40px" }}>{message}</p>
-      <Button style={{ margin: "30px" }} href="/">
-        Take me back
-      </Button>
+      <header {...headerProps} />
     </div>
   );
 };
