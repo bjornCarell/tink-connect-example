@@ -8,6 +8,7 @@ import {getAccessToken, CLIENT_ID, CLIENT_SECRET} from './getAccessToken/getAcce
 import {getUserData} from './getUserData/getUserData'
 import {getAccountData} from './getAccountData/getAccountData'
 import {getInvestmentData} from './getInvestmentsData/getInvestmentsData'
+import {getCategoryData} from './getCategoryData/getCategoryData'
 
 dotenv.config()
 const app = express();
@@ -70,16 +71,6 @@ async function getTransactionData(token) {
       Authorization: "Bearer " + token
     },
     body: JSON.stringify({ limit: 5 })
-  });
-
-  return handleResponse(response);
-}
-
-async function getCategoryData(token) {
-  const response = await fetch(base + "/categories", {
-    headers: {
-      Authorization: "Bearer " + token
-    }
   });
 
   return handleResponse(response);
