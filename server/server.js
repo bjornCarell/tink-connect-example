@@ -7,6 +7,7 @@ import {handleResponse} from './handleResponse/handleResponse'
 import {getAccessToken, CLIENT_ID, CLIENT_SECRET} from './getAccessToken/getAccessToken'
 import {getUserData} from './getUserData/getUserData'
 import {getAccountData} from './getAccountData/getAccountData'
+import {getInvestmentData} from './getInvestmentsData/getInvestmentsData'
 
 dotenv.config()
 const app = express();
@@ -59,17 +60,6 @@ async function getData(accessToken) {
     investmentData,
     transactionData
   };
-}
-
-async function getInvestmentData(token) {
-  const response = await fetch(base + "/investments", {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    }
-  });
-
-  return handleResponse(response);
 }
 
 async function getTransactionData(token) {
