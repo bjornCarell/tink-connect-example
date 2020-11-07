@@ -2,12 +2,8 @@ import dotenv from'dotenv'
 import express from 'express'
 import bodyParser from 'body-parser'
 import path from 'path'
-import {getAccessToken, CLIENT_ID, CLIENT_SECRET} from './getAccessToken/getAccessToken'
-import {getUserData} from './getUserData/getUserData'
-import {getAccountData} from './getAccountData/getAccountData'
-import {getInvestmentData} from './getInvestmentData/getInvestmentData'
-import {getCategoryData} from './getCategoryData/getCategoryData'
-import {getTransactionData} from './getTransactionData/getTransactionData'
+import { CLIENT_ID, CLIENT_SECRET} from './envs/envs'
+import {getAllData} from './getAllData/getAllData'
 
 dotenv.config()
 const app = express();
@@ -25,7 +21,7 @@ const base = "https://api.tink.se/api/v1";
 // This is the server API, where the client can post a received OAuth code.
 app.post("/callback", function(req, res) {
   getAccessToken(req.body.code, base)
-    .then(response => getData(response.access_token))
+    .then(response => getAllData(response.access_token))
     .then(response => {
       res.json({
         response
@@ -36,31 +32,6 @@ app.post("/callback", function(req, res) {
       res.status(500).json({ message: err.toString() });
     });
 });
-
-
-async function getData(accessToken) {
-  const [
-    categoryData,
-    userData,
-    accountData,
-    investmentData,
-    transactionData
-  ] = await Promise.all([
-    getCategoryData(accessToken),
-    getUserData(accessToken),
-    getAccountData(accessToken),
-    getInvestmentData(accessToken),
-    getTransactionData(accessToken)
-  ]);
-
-  return {
-    categoryData,
-    userData,
-    accountData,
-    investmentData,
-    transactionData
-  };
-}
 
 if (!CLIENT_ID) {
   console.log(
