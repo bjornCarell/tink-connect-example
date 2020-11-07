@@ -1,6 +1,6 @@
 import {handleResponse} from '../handleResponse/handleResponse'
 
-export const getInvestmentsData = async (token, base) => {
+export const getInvestmentData = async (token, base) => {
     const response = await fetch(`${base}/investments`, {
         'Application-type': 'application.json',
         Authorization: `Bearer ${token}`

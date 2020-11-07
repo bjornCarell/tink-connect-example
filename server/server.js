@@ -2,13 +2,12 @@ import dotenv from'dotenv'
 import express from 'express'
 import bodyParser from 'body-parser'
 import path from 'path'
-import fetch from 'node-fetch'
-import {handleResponse} from './handleResponse/handleResponse'
 import {getAccessToken, CLIENT_ID, CLIENT_SECRET} from './getAccessToken/getAccessToken'
 import {getUserData} from './getUserData/getUserData'
 import {getAccountData} from './getAccountData/getAccountData'
-import {getInvestmentData} from './getInvestmentsData/getInvestmentsData'
+import {getInvestmentData} from './getInvestmentData/getInvestmentData'
 import {getCategoryData} from './getCategoryData/getCategoryData'
+import {getTransactionData} from './getTransactionData/getTransactionData'
 
 dotenv.config()
 const app = express();
@@ -61,19 +60,6 @@ async function getData(accessToken) {
     investmentData,
     transactionData
   };
-}
-
-async function getTransactionData(token) {
-  const response = await fetch(base + "/search", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    },
-    body: JSON.stringify({ limit: 5 })
-  });
-
-  return handleResponse(response);
 }
 
 if (!CLIENT_ID) {
