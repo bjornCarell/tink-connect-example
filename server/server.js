@@ -4,13 +4,10 @@ import bodyParser from 'body-parser'
 import path from 'path'
 import fetch from 'node-fetch'
 import {handleResponse} from './handleResponse/handleResponse'
-import {getAccessToken} from './getAccessToken/getAccessToken'
+import {getAccessToken, CLIENT_ID, CLIENT_SECRET} from './getAccessToken/getAccessToken'
 
 dotenv.config()
 const app = express();
-
-const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
-const CLIENT_SECRET = process.env.TINK_CLIENT_SECRET;
 
 app.use(express.static(path.join(__dirname, "client/build")));
 app.use(bodyParser.json());

@@ -1,5 +1,8 @@
 import {handleResponse} from '../handleResponse/handleResponse'
 
+export const CLIENT_ID = process.env.REACT_APP_CLIENT_ID;
+export const CLIENT_SECRET = process.env.TINK_CLIENT_SECRET;
+
 export const getAccessToken = async (code,base) => {
     const body = {
         code: code,
