@@ -4,6 +4,7 @@ import bodyParser from 'body-parser'
 import path from 'path'
 import fetch from 'node-fetch'
 import {handleResponse} from './handleResponse/handleResponse'
+import {getAccessToken} from './getAccessToken/getAccessToken'
 
 dotenv.config()
 const app = express();
@@ -23,7 +24,7 @@ const base = "https://api.tink.se/api/v1";
 
 // This is the server API, where the client can post a received OAuth code.
 app.post("/callback", function(req, res) {
-  getAccessToken(req.body.code)
+  getAccessToken(req.body.code, base)
     .then(response => getData(response.access_token))
     .then(response => {
       res.json({
@@ -59,27 +60,6 @@ async function getData(accessToken) {
     investmentData,
     transactionData
   };
-}
-
-async function getAccessToken(code) {
-  const body = {
-    code: code,
-    client_id: CLIENT_ID, // Your OAuth client identifier.
-    client_secret: CLIENT_SECRET, // Your OAuth client secret. Always handle the secret with care.
-    grant_type: "authorization_code"
-  };
-
-  const response = await fetch(base + "/oauth/token", {
-    method: "POST",
-    body: Object.keys(body)
-      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(body[key]))
-      .join("&"),
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
-    }
-  });
-
-  return handleResponse(response);
 }
 
 async function getUserData(token) {
