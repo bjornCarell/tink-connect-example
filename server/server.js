@@ -6,6 +6,7 @@ import fetch from 'node-fetch'
 import {handleResponse} from './handleResponse/handleResponse'
 import {getAccessToken, CLIENT_ID, CLIENT_SECRET} from './getAccessToken/getAccessToken'
 import {getUserData} from './getUserData/getUserData'
+import {getAccountData} from './getAccountData/getAccountData'
 
 dotenv.config()
 const app = express();
@@ -58,17 +59,6 @@ async function getData(accessToken) {
     investmentData,
     transactionData
   };
-}
-
-async function getAccountData(token) {
-  const response = await fetch(base + "/accounts/list", {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    }
-  });
-
-  return handleResponse(response);
 }
 
 async function getInvestmentData(token) {

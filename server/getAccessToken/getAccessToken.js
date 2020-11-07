@@ -17,7 +17,7 @@ export const getAccessToken = async (code,base) => {
             .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(body[key]))
             .join('&'),
         headers: {
-            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
         }
     });
 
